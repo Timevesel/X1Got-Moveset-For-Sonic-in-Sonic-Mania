@@ -17,8 +17,42 @@ void Player_Update(void)
     if (self->BoostGauge > 40)
     {
         self->BoostGauge = 40;
-    } 
+    }
+    if (self->characterID == ID_SONIC)
+    {
+        if (self->camera && !Zone->autoScrollSpeed) {
+            self->scrollDelay   = 1;
+            self->camera->state = Camera_State_FollowXY;
+        } 
+    }
+#if MANIA_USE_PLUS
+    int32 id = API_GetFilteredInputDeviceID(false, false, 0);
+#else
+    int32 id = API_GetFilteredInputDeviceID(INPUT_NONE);
+#endif
+    int32 gamepadType = API_GetInputDeviceType(id);
 
+    int32 deviceType = (gamepadType >> 8) & 0xFF;
+    if (deviceType == DEVICE_TYPE_CONTROLLER) {
+        if (ControllerInfo[self->controllerID].keyX.press == true)
+        {
+            self->ButtonXFix = true;
+        }
+        else
+        {
+            self->ButtonXFix = false;
+        }
+    }
+    if (deviceType == DEVICE_TYPE_KEYBOARD) {
+        if (ControllerInfo[self->controllerID].keyC.press == true)
+        {
+            self->ButtonXFix = true;
+        }
+        else
+        {
+            self->ButtonXFix = false;
+        }
+    } 
 #if MANIA_USE_PLUS
     // Cheat prevention, you can't play as mighty or ray if you don't have plus installed & active
     if (!API.CheckDLC(DLC_PLUS) && self->characterID > ID_KNUCKLES)
@@ -3847,12 +3881,18 @@ void Player_State_Ground(void)
                     self->animator.animationID = ANI_JUMP;
                     self->StompState = 0;
                     RSDK.PlaySfx(Shield->sfxBubbleBounce, false, 255);
-                    if (self->camera){Camera_ShakeScreen(self->camera->screenID, 5, 5);}
+                    if (self->camera){
+                        if (self->animator.animationID == ANI_JUMP)
+                        {Camera_ShakeScreen(self->camera->screenID, 5, 5);}
+                    }
                     return;
                 }
                 else
                 {
-                    if (self->camera){Camera_ShakeScreen(self->camera->screenID, 4, 4);}
+                    if (self->camera){
+                        if (self->animator.animationID == ANI_JUMP)
+                        {Camera_ShakeScreen(self->camera->screenID, 4, 4);}
+                    }
                     if (self->abilityTimer < self->minRunVelocity)
                     {
                         if (self->left)
@@ -3906,7 +3946,7 @@ void Player_State_Ground(void)
             //             self->velocity.x += -0x3000;
             //     }   
             // }
-            if (self->BoostGauge >= 10 && ControllerInfo[self->controllerID].keyC.press == true)
+            if (self->BoostGauge >= 10 && self->ButtonXFix == true)
             {
                 self->jumpPress = false;
                 self->jumpHold = false;
@@ -4095,7 +4135,7 @@ void Player_State_Air(void)
 
                     if(self->DoubleJumpCheck == true)
                     {
-                      if (ControllerInfo[self->controllerID].keyC.press)
+                      if (self->ButtonXFix == true)
                       {
                         self->velocity.y = 0;
                         self->velocity.y += -0x60000;

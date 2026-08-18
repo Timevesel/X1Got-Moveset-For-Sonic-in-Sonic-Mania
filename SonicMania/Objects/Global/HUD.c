@@ -308,8 +308,9 @@ void HUD_Draw(void)
     {
         self->boostGaugeAnimator.frameID = 0;
     }
-    RSDK.DrawSprite(&self->boostGaugeAnimator, &boostPos, true);
-
+    if (player->characterID == ID_SONIC) {
+        RSDK.DrawSprite(&self->boostGaugeAnimator, &boostPos, true);
+    }
 
     // Draw Score
     drawPos.x = scorePos.x + TO_FIXED(97);
