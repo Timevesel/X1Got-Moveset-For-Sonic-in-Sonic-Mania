@@ -144,173 +144,19 @@ void HUD_Draw(void)
     RSDK.DrawSprite(&self->hudElementsAnimator, &scorePos, true);
 
     // Draw Boost Gauge
-    if (player->BoostGauge <= 0)
-    {
-      self->boostGaugeAnimator.frameID = 4;  
-    }
-    if (player->BoostGauge == 1)
-    {
+    if (player->BoostGauge < 10)
         self->boostGaugeAnimator.frameID = 4;
-    }
-    if (player->BoostGauge == 2)
-    {
-        self->boostGaugeAnimator.frameID = 4;
-    }
-    if (player->BoostGauge == 3)
-    {
-        self->boostGaugeAnimator.frameID = 4;
-    }
-    if (player->BoostGauge == 4)
-    {
-        self->boostGaugeAnimator.frameID = 4;
-    }
-    if (player->BoostGauge == 5)
-    {
-        self->boostGaugeAnimator.frameID = 4;
-    }
-    if (player->BoostGauge == 6)
-    {
-        self->boostGaugeAnimator.frameID = 4;
-    }
-    if (player->BoostGauge == 7)
-    {
-        self->boostGaugeAnimator.frameID = 4;
-    }
-    if (player->BoostGauge == 8)
-    {
-        self->boostGaugeAnimator.frameID = 4;
-    }
-    if (player->BoostGauge == 9)
-    {
-        self->boostGaugeAnimator.frameID = 4;
-    }
-    if (player->BoostGauge == 10)
-    {
+    else if (player->BoostGauge < 20)
         self->boostGaugeAnimator.frameID = 3;
-    }
-    if (player->BoostGauge == 11)
-    {
-        self->boostGaugeAnimator.frameID = 3;
-    }
-    if (player->BoostGauge == 12)
-    {
-        self->boostGaugeAnimator.frameID = 3;
-    }
-    if (player->BoostGauge == 13)
-    {
-        self->boostGaugeAnimator.frameID = 3;
-    }
-    if (player->BoostGauge == 14)
-    {
-        self->boostGaugeAnimator.frameID = 3;
-    }
-    if (player->BoostGauge == 15)
-    {
-        self->boostGaugeAnimator.frameID = 3;
-    }
-    if (player->BoostGauge == 16)
-    {
-        self->boostGaugeAnimator.frameID = 3;
-    }
-    if (player->BoostGauge == 17)
-    {
-        self->boostGaugeAnimator.frameID = 3;
-    }
-    if (player->BoostGauge == 18)
-    {
-        self->boostGaugeAnimator.frameID = 3;
-    }
-    if (player->BoostGauge == 19)
-    {
-        self->boostGaugeAnimator.frameID = 3;
-    }
-    if (player->BoostGauge == 20)
-    {
+    else if (player->BoostGauge < 30)
         self->boostGaugeAnimator.frameID = 2;
-    }
-    if (player->BoostGauge == 21)
-    {
-        self->boostGaugeAnimator.frameID = 2;
-    }
-    if (player->BoostGauge == 22)
-    {
-        self->boostGaugeAnimator.frameID = 2;
-    }
-    if (player->BoostGauge == 23)
-    {
-        self->boostGaugeAnimator.frameID = 2;
-    }
-    if (player->BoostGauge == 24)
-    {
-        self->boostGaugeAnimator.frameID = 2;
-    }
-    if (player->BoostGauge == 25)
-    {
-        self->boostGaugeAnimator.frameID = 2;
-    }
-    if (player->BoostGauge == 26)
-    {
-        self->boostGaugeAnimator.frameID = 2;
-    }
-    if (player->BoostGauge == 27)
-    {
-        self->boostGaugeAnimator.frameID = 2;
-    }
-    if (player->BoostGauge == 28)
-    {
-        self->boostGaugeAnimator.frameID = 2;
-    }
-    if (player->BoostGauge == 29)
-    {
-        self->boostGaugeAnimator.frameID = 2;
-    }
-    if (player->BoostGauge == 30)
-    {
+    else if (player->BoostGauge < 40)
         self->boostGaugeAnimator.frameID = 1;
-    }
-    if (player->BoostGauge == 31)
-    {
-        self->boostGaugeAnimator.frameID = 1;
-    }
-    if (player->BoostGauge == 32)
-    {
-        self->boostGaugeAnimator.frameID = 1;
-    }
-    if (player->BoostGauge == 33)
-    {
-        self->boostGaugeAnimator.frameID = 1;
-    }
-    if (player->BoostGauge == 34)
-    {
-        self->boostGaugeAnimator.frameID = 1;
-    }
-    if (player->BoostGauge == 35)
-    {
-        self->boostGaugeAnimator.frameID = 1;
-    }
-    if (player->BoostGauge == 36)
-    {
-        self->boostGaugeAnimator.frameID = 1;
-    }
-    if (player->BoostGauge == 37)
-    {
-        self->boostGaugeAnimator.frameID = 1;
-    }
-    if (player->BoostGauge == 38)
-    {
-        self->boostGaugeAnimator.frameID = 1;
-    }
-    if (player->BoostGauge == 39)
-    {
-        self->boostGaugeAnimator.frameID = 1;
-    }
-    if (player->BoostGauge == 40)
-    {
+    else
         self->boostGaugeAnimator.frameID = 0;
-    }
-    if (player->characterID == ID_SONIC) {
+
+    if (player->characterID == ID_SONIC)
         RSDK.DrawSprite(&self->boostGaugeAnimator, &boostPos, true);
-    }
 
     // Draw Score
     drawPos.x = scorePos.x + TO_FIXED(97);

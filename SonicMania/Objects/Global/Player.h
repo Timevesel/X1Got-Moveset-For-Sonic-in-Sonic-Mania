@@ -471,7 +471,6 @@ struct EntityPlayer {
     int32 BoostGauge;
     bool32 BoostMode;
     uint16 BoostModeTimer;
-    bool32 ButtonXFix;
 };
 
 // Object Struct
